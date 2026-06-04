@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخطة التشغيلية السنوية للموارد البشرية | YLY 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0A2342;
+  --accent: #C8A951;
+  --accent2: #E8B923;
+  --light: #F5F0E8;
+  --white: #FFFFFF;
+  --gray: #6B7280;
+  --phase1: #1B4F72;
+  --phase2: #1A6B3C;
+  --phase3: #7D3C98;
+  --phase4: #B7410E;
+  --card-bg: rgba(255,255,255,0.06);
+  --glow: 0 0 40px rgba(200,169,81,0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', 'Tajawal', sans-serif;
+  background: var(--primary);
+  color: var(--white);
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+/* ===== NOISE OVERLAY ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ===== ANIMATED BACKGROUND MESH ===== */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float-orb linear infinite;
+}
+.orb1 { width: 500px; height: 500px; background: rgba(200,169,81,0.08); top: -100px; right: -100px; animation-duration: 20s; }
+.orb2 { width: 400px; height: 400px; background: rgba(26,107,60,0.1); bottom: 20%; left: -100px; animation-duration: 15s; animation-delay: -5s; }
+.orb3 { width: 300px; height: 300px; background: rgba(125,60,152,0.08); top: 50%; right: 30%; animation-duration: 25s; animation-delay: -10s; }
+
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0) scale(1); }
+  33% { transform: translateY(-40px) scale(1.05); }
+  66% { transform: translateY(20px) scale(0.95); }
+}
+
+/* ===== SCROLL PROGRESS ===== */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  z-index: 1000;
+  width: 0%;
+  transition: width 0.1s;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  z-index: 100;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,35,66,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200,169,81,0.2);
+  transition: all 0.3s;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.nav-emblem {
+  width: 44px; height: 44px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--accent);
+  background: rgba(200,169,81,0.1);
+  animation: pulse-border 2s ease-in-out infinite;
+}
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,169,81,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(200,169,81,0); }
+}
+.nav-title-small { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+.nav-sub-small { font-size: 0.65rem; color: rgba(255,255,255,0.6); }
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+.nav-links a:hover {
+  color: var(--accent);
+  border-color: rgba(200,169,81,0.3);
+  background: rgba(200,169,81,0.08);
+}
+
+/* ===== SECTIONS ===== */
+section { position: relative; z-index: 1; }
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  border: 1px solid rgba(200,169,81,0.5);
+  border-radius: 30px;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: rgba(200,169,81,0.08);
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  animation: fade-in-up 0.8s ease both;
+}
+.hero-badge::before {
+  content: '◆';
+  font-size: 0.5rem;
+  animation: spin 3s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero-logo-main {
+  width: 120px; height: 120px;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  position: relative;
+  animation: fade-in-up 0.8s ease 0.1s both;
+}
+.hero-logo-main::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(200,169,81,0.3);
+  border-radius: 50%;
+  animation: rotate-ring 8s linear infinite;
+}
+.hero-logo-main::after {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border: 1px dashed rgba(200,169,81,0.15);
+  border-radius: 50%;
+  animation: rotate-ring 12s linear infinite reverse;
+}
+@keyframes rotate-ring { to { transform: rotate(360deg); } }
+.hero-logo-text {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  animation: fade-in-up 0.8s ease 0.2s both;
+}
+.hero-title span {
+  background: linear-gradient(135deg, var(--accent), var(--accent2), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 0.5rem;
+  animation: fade-in-up 0.8s ease 0.3s both;
+}
+.hero-year {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 0.2rem 1rem;
+  border: 1px solid rgba(200,169,81,0.4);
+  border-radius: 20px;
+  margin-bottom: 2.5rem;
+  animation: fade-in-up 0.8s ease 0.35s both;
+}
+
+.hero-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(200,169,81,0.2);
+  border-radius: 50px;
+  margin-bottom: 3rem;
+  animation: fade-in-up 0.8s ease 0.4s both;
+}
+.profile-avatar {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--primary);
+}
+.profile-info { text-align: right; }
+.profile-name { font-size: 0.95rem; font-weight: 700; }
+.profile-role { font-size: 0.75rem; color: var(--accent); }
+
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fade-in-up 0.8s ease 0.5s both;
+}
+.hero-stat {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.hero-stat:hover { transform: translateY(-4px); border-color: rgba(200,169,81,0.4); }
+.hero-stat::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.stat-number { font-size: 2rem; font-weight: 900; color: var(--accent); }
+.stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+.scroll-hint span { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
+.scroll-arrow { width: 20px; height: 20px; border-left: 2px solid rgba(200,169,81,0.5); border-bottom: 2px solid rgba(200,169,81,0.5); transform: rotate(-45deg); margin-top: -5px; }
+@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+/* ===== VISION SECTION ===== */
+#vision {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.section-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  padding: 0.3rem 1rem;
+  border: 1px solid rgba(200,169,81,0.3);
+  border-radius: 20px;
+  background: rgba(200,169,81,0.06);
+}
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+.section-title .gold { color: var(--accent); }
+.section-divider {
+  width: 60px; height: 3px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.vision-card {
+  background: linear-gradient(135deg, rgba(200,169,81,0.12), rgba(200,169,81,0.04));
+  border: 1px solid rgba(200,169,81,0.3);
+  border-radius: 24px;
+  padding: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.vision-card:hover { transform: translateY(-4px); }
+.vision-card::before {
+  content: '"';
+  position: absolute;
+  top: -20px; right: 30px;
+  font-size: 12rem;
+  color: rgba(200,169,81,0.08);
+  font-family: serif;
+  line-height: 1;
+}
+.vision-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.vision-text {
+  font-size: 1.2rem;
+  line-height: 2;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ===== STRATEGIC OBJECTIVES ===== */
+#objectives {
+  padding: 4rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.objectives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.obj-card {
+  padding: 2rem 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+  cursor: default;
+}
+.obj-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  background: rgba(200,169,81,0.08);
+  box-shadow: var(--glow);
+}
+.obj-number {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(200,169,81,0.1);
+  line-height: 1;
+  font-family: 'Tajawal';
+}
+.obj-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.obj-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.obj-desc { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+/* ===== PHASE SECTIONS ===== */
+.phase-section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.phase-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  padding: 2.5rem;
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.phase-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  border-radius: 24px;
+}
+
+.phase-1 .phase-header { border: 1px solid rgba(27,79,114,0.5); background: rgba(27,79,114,0.15); }
+.phase-1 .phase-header::before { background: var(--phase1); }
+.phase-2 .phase-header { border: 1px solid rgba(26,107,60,0.5); background: rgba(26,107,60,0.15); }
+.phase-2 .phase-header::before { background: var(--phase2); }
+.phase-3 .phase-header { border: 1px solid rgba(125,60,152,0.5); background: rgba(125,60,152,0.15); }
+.phase-3 .phase-header::before { background: var(--phase3); }
+.phase-4 .phase-header { border: 1px solid rgba(183,65,14,0.5); background: rgba(183,65,14,0.15); }
+.phase-4 .phase-header::before { background: var(--phase4); }
+
+.phase-number-badge {
+  flex-shrink: 0;
+  width: 80px; height: 80px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  position: relative;
+}
+.phase-1 .phase-number-badge { background: var(--phase1); }
+.phase-2 .phase-number-badge { background: var(--phase2); }
+.phase-3 .phase-number-badge { background: var(--phase3); }
+.phase-4 .phase-number-badge { background: var(--phase4); }
+
+.phase-num { font-size: 2rem; line-height: 1; }
+.phase-label { font-size: 0.55rem; letter-spacing: 0.1em; opacity: 0.8; }
+
+.phase-info { flex: 1; }
+.phase-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem; }
+.phase-period {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 0.75rem;
+}
+.phase-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+/* ===== ADDITIONS GRID ===== */
+.additions-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.additions-title::before {
+  content: '';
+  width: 4px; height: 20px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.additions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.addition-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 1.75rem;
+  transition: all 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+.addition-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200,169,81,0.4);
+  background: rgba(200,169,81,0.06);
+}
+.addition-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s;
+}
+.addition-card:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.addition-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  background: rgba(200,169,81,0.15);
+  border: 1px solid rgba(200,169,81,0.3);
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.addition-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.addition-emoji { font-size: 1.1rem; }
+.addition-solve {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(26,107,60,0.25);
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.2);
+  margin-bottom: 0.75rem;
+}
+.addition-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+
+/* ===== PROBLEMS SECTION ===== */
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.problem-card {
+  padding: 1.25rem;
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.15);
+  border-radius: 14px;
+  transition: all 0.3s;
+}
+.problem-card:hover { border-color: rgba(239,68,68,0.3); }
+.problem-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.problem-text { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
+.problems-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f87171;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.problems-title::before {
+  content: '';
+  width: 4px; height: 20px;
+  background: #ef4444;
+  border-radius: 2px;
+}
+
+/* ===== TOOLS MATRIX ===== */
+#tools {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.tools-table-wrapper {
+  overflow-x: auto;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.tools-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.tools-table thead tr {
+  background: rgba(200,169,81,0.12);
+  border-bottom: 1px solid rgba(200,169,81,0.2);
+}
+.tools-table th {
+  padding: 1rem 1.25rem;
+  text-align: right;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.tools-table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.2s;
+}
+.tools-table tbody tr:hover { background: rgba(255,255,255,0.04); }
+.tools-table td {
+  padding: 0.9rem 1.25rem;
+  color: rgba(255,255,255,0.8);
+  vertical-align: middle;
+}
+.tool-tag {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+.tag-word { background: rgba(59,130,246,0.15); color: #93c5fd; border-color: rgba(147,197,253,0.3); }
+.tag-excel { background: rgba(34,197,94,0.15); color: #86efac; border-color: rgba(134,239,172,0.3); }
+.tag-google { background: rgba(234,179,8,0.15); color: #fde047; border-color: rgba(253,224,71,0.3); }
+
+/* ===== KPIs ===== */
+#kpis {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.kpis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.kpi-card {
+  padding: 2rem 1.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.kpi-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+.kpi-circle {
+  width: 80px; height: 80px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) var(--pct), rgba(255,255,255,0.1) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.kpi-circle::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+.kpi-pct {
+  position: relative;
+  z-index: 1;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+.kpi-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; }
+.kpi-desc { font-size: 0.75rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 3rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  z-index: 1;
+}
+.footer-logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.footer-line { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+.footer-ministry {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.4rem 1.2rem;
+  border: 1px solid rgba(200,169,81,0.2);
+  border-radius: 20px;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding: 1rem 0;
+  margin-bottom: 3rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 20px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), rgba(200,169,81,0.1));
+}
+.timeline-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  padding-right: 55px;
+  position: relative;
+}
+.timeline-dot {
+  position: absolute;
+  right: 12px; top: 1.5rem;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timeline-dot::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.timeline-content {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  transition: all 0.3s;
+}
+.timeline-content:hover {
+  border-color: rgba(200,169,81,0.3);
+  background: rgba(200,169,81,0.05);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero-stats { gap: 1rem; }
+  .phase-header { flex-direction: column; }
+  .phase-number-badge { width: 60px; height: 60px; }
+}
+
+/* Gold divider */
+.gold-divider {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,169,81,0.3), transparent);
+}
+
+/* Floating particles */
+.particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particle-float linear infinite;
+}
+@keyframes particle-float {
+  0% { opacity: 0; transform: translateY(100vh) scale(0); }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { opacity: 0; transform: translateY(-100vh) scale(1); }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- Background -->
+<div class="bg-mesh">
+  <div class="mesh-orb orb1"></div>
+  <div class="mesh-orb orb2"></div>
+  <div class="mesh-orb orb3"></div>
+</div>
+<div class="particles" id="particles"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="nav-emblem">YLY</div>
+    <div>
+      <div class="nav-title-small">اتحاد شباب من أجل مصر</div>
+      <div class="nav-sub-small">وزارة الشباب والرياضة</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#vision">الرؤية</a></li>
+    <li><a href="#phases">المراحل</a></li>
+    <li><a href="#tools">الأدوات</a></li>
+    <li><a href="#kpis">مؤشرات النجاح</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">الخطة التشغيلية السنوية ٢٠٢٦</div>
+
+  <div class="hero-logo-main">
+    <div class="hero-logo-text">YLY</div>
+  </div>
+
+  <h1 class="hero-title">
+    إدارة وتطوير<br>
+    <span>الموارد البشرية</span>
+  </h1>
+  <p class="hero-subtitle">الخطة التشغيلية السنوية الشاملة</p>
+  <div class="hero-year">سيزون ٢٠٢٦</div>
+
+  <div class="hero-profile">
+    <div class="profile-avatar">م</div>
+    <div class="profile-info">
+      <div class="profile-name">محمد جبريل</div>
+      <div class="profile-role">مسئول الموارد البشرية · تيم 7G · Computer Science</div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-number">4</div>
+      <div class="stat-label">مراحل تشغيلية</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-number">+20</div>
+      <div class="stat-label">إضافة وبروتوكول</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-number">85%</div>
+      <div class="stat-label">معدل استبقاء مستهدف</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-number">6</div>
+      <div class="stat-label">أدوات رقمية متكاملة</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>اسحب للأسفل</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="section-header reveal">
+    <div class="section-tag">Vision</div>
+    <h2 class="section-title">الرؤية <span class="gold">الاستراتيجية</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="vision-card reveal">
+    <span class="vision-icon">👁️</span>
+    <p class="vision-text">
+      "بناء بيئة تطوعية مستدامة وقائمة على العدالة الرقمية، يتم فيها تمكين كل عضو وتوجيه شغفه ومؤهلاته لخدمة أهداف الاتحاد، مع صناعة صف ثانٍ من القادة قادراً على قيادة المستقبل بكل كفاءة."
+    </p>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- OBJECTIVES -->
+<section id="objectives">
+  <div class="section-header reveal">
+    <div class="section-tag">Strategic Objectives</div>
+    <h2 class="section-title">الأهداف <span class="gold">الاستراتيجية</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="objectives-grid">
+    <div class="obj-card reveal">
+      <div class="obj-number">01</div>
+      <span class="obj-icon">🎯</span>
+      <div class="obj-title">تصفير نسبة الانسحاب</div>
+      <p class="obj-desc">الاحتواء النفسي والمتابعة الاستباقية عبر "كبسولة التوقعات" لفرملة Burnout وقت الامتحانات</p>
+    </div>
+    <div class="obj-card reveal" style="transition-delay:0.1s">
+      <div class="obj-number">02</div>
+      <span class="obj-icon">⚖️</span>
+      <div class="obj-title">العدالة والشفافية الرقمية</div>
+      <p class="obj-desc">تفعيل لغة الأرقام وشيتات الإكسيل لضمان تكافؤ الفرص في النزولات والتاسكات ومنع احتكار المهام</p>
+    </div>
+    <div class="obj-card reveal" style="transition-delay:0.2s">
+      <div class="obj-number">03</div>
+      <span class="obj-icon">🚀</span>
+      <div class="obj-title">تمكين الصف الثاني</div>
+      <p class="obj-desc">نظام معايشة القيادة الدورية وتوثيق أداء النواب بالأرقام لضمان تسليم وتسلم القيادة بسلاسة</p>
+    </div>
+    <div class="obj-card reveal" style="transition-delay:0.3s">
+      <div class="obj-number">04</div>
+      <span class="obj-icon">🔄</span>
+      <div class="obj-title">المرونة التشغيلية</div>
+      <p class="obj-desc">توازن مرن بين الالتزامات الأكاديمية للأعضاء ودورهم التطوعي في الكيان عبر نظام Freeze ذكي</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<div id="phases"></div>
+
+<!-- PHASE 1 -->
+<section class="phase-section phase-1">
+  <div class="phase-header reveal">
+    <div class="phase-number-badge">
+      <span class="phase-num">١</span>
+      <span class="phase-label">PHASE</span>
+    </div>
+    <div class="phase-info">
+      <h2 class="phase-title">الاستقطاب، التأسيس، والدمج السريع</h2>
+      <div class="phase-period">📅 شهر ٧ – ٨</div>
+      <p class="phase-desc">إدارة الإنترفيوهات وفرز التقييمات وبناء قاعدة البيانات الشاملة من اليوم الأول مع احتواء الأعضاء الجدد</p>
+    </div>
+  </div>
+
+  <div class="problems-title reveal">⚠️ المشاكل المتوقعة في هذه المرحلة</div>
+  <div class="problems-grid reveal">
+    <div class="problem-card">
+      <div class="problem-icon">😵</div>
+      <p class="problem-text"><strong>توهة الأعضاء بعد الإضافة:</strong> رسائل وتاسكات ومعسكر في وقت واحد يسبب ضغطاً وعدم استيعاب</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">❓</div>
+      <p class="problem-text"><strong>عدم معرفة مهارات الأعضاء:</strong> نعتمد على أسماء ثابتة في الفعاليات الأولى بسبب غياب سجل المهارات</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">📉</div>
+      <p class="problem-text"><strong>الـ Drop-off التقليدي:</strong> الحماس الأولي يتراجع مع دخول نص السيزون وضغط الامتحانات</p>
+    </div>
+  </div>
+
+  <div class="additions-title reveal">✨ الإضافات والبروتوكولات الجديدة</div>
+  <div class="additions-grid">
+    <div class="addition-card reveal">
+      <div class="addition-num">01</div>
+      <div class="addition-title"><span class="addition-emoji">📖</span> كتيب "خطوة بخطوة"</div>
+      <div class="addition-solve">✓ يحل توهة الأعضاء</div>
+      <p class="addition-desc">ملف PDF منسق "دليلك الأول في YLY" يحتوي كلمة ترحيب، هيكل الاتحاد، نظام التقييم، ومواعيد المعسكر — يُقرأ في دقيقتين</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.1s">
+      <div class="addition-num">02</div>
+      <div class="addition-title"><span class="addition-emoji">📊</span> قاعدة بيانات سجل المهارات</div>
+      <div class="addition-solve">✓ يحل مشكلة اكتشاف المهارات</div>
+      <p class="addition-desc">فورم مبسطة مع رسالة القبول تجمع (مهارات، اهتمامات، خبرات) وتُدرج فوراً في شيت إكسيل منظم لتوزيع عادل من اليوم الأول</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.2s">
+      <div class="addition-num">03</div>
+      <div class="addition-title"><span class="addition-emoji">💊</span> كبسولة التوقعات</div>
+      <div class="addition-solve">✓ يفرمل الـ Drop-off</div>
+      <p class="addition-desc">فورم 3 أسئلة أثناء المعسكر — يُحفظ ويُستخدم في نص السيزون لإعادة ربط العضو بشغفه: "فاكر لما كتبت إنك نفسك تتعلم كذا؟"</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- PHASE 2 -->
+<section class="phase-section phase-2">
+  <div class="phase-header reveal">
+    <div class="phase-number-badge">
+      <span class="phase-num">٢</span>
+      <span class="phase-label">PHASE</span>
+    </div>
+    <div class="phase-info">
+      <h2 class="phase-title">التأهيل المهاراتي والتفعيل الميداني</h2>
+      <div class="phase-period">📅 شهر ٩ – ١١</div>
+      <p class="phase-desc">السيشنات التخصصية، الفعاليات والنزولات الميدانية، وبناء روح الفريق عبر بروتوكولات الدمج والمتابعة الذكية</p>
+    </div>
+  </div>
+
+  <div class="problems-title reveal">⚠️ المشاكل المتوقعة في هذه المرحلة</div>
+  <div class="problems-grid reveal">
+    <div class="problem-card">
+      <div class="problem-icon">🤫</div>
+      <p class="problem-text"><strong>ضعف التفاعل على الجروبات:</strong> خجل وضياع في الأعداد الكبيرة</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🔁</div>
+      <p class="problem-text"><strong>الاعتماد على نفس الأشخاص:</strong> ظهور "وشوش معروفة" يحتكر الفرص</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">😴</div>
+      <p class="problem-text"><strong>سوء توجيه الميمبر:</strong> تاسك غير ملائم يسبب ملل وتراجع</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🚧</div>
+      <p class="problem-text"><strong>فجوة التواصل:</strong> حزازيات بين الهيد والميمبر تؤثر على روح الفريق</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">👁️</div>
+      <p class="problem-text"><strong>الميمبر الصامت:</strong> "Seen" بدون رد يعطل توزيع المهام</p>
+    </div>
+  </div>
+
+  <div class="additions-title reveal">✨ الإضافات والبروتوكولات الجديدة</div>
+  <div class="additions-grid">
+    <div class="addition-card reveal">
+      <div class="addition-num">01</div>
+      <div class="addition-title"><span class="addition-emoji">🔵</span> سيستم الدوائر المصغرة</div>
+      <div class="addition-solve">✓ يكسر رهبة الأعداد الكبيرة</div>
+      <p class="addition-desc">تقسيم اللجنة لمجموعات صغيرة (5–7 أعضاء + Mentor) لزيادة التفاعل والمتابعة الدقيقة ومنع "الضياع" في الوسط</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.1s">
+      <div class="addition-num">02</div>
+      <div class="addition-title"><span class="addition-emoji">📋</span> شيت سجل المشاركة العادل</div>
+      <div class="addition-solve">✓ يمنع احتكار المهام</div>
+      <p class="addition-desc">تسجيل كل مشاركة في إكسيل — الأرقام ترصد من شارك 3 مرات تلقائياً وتمنعه وتمنح الفرصة لغيره بعدالة كاملة</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.2s">
+      <div class="addition-num">03</div>
+      <div class="addition-title"><span class="addition-emoji">🗝️</span> دليل إدارة الدوافع</div>
+      <div class="addition-solve">✓ يرفع مستوى الحماس</div>
+      <p class="addition-desc">كتالوج يحدد "مفاتيح التحفيز" لكل عضو (تقدير، تعلم، جانب اجتماعي) لتوزيع تاسكات تلمس شغفه بالظبط</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.3s">
+      <div class="addition-num">04</div>
+      <div class="addition-title"><span class="addition-emoji">🎉</span> بروتوكول الربط الاجتماعي المبكر</div>
+      <div class="addition-solve">✓ يدمج الأعضاء الصامتين</div>
+      <p class="addition-desc">خروجة ترفيهية إلزامية لكل لجنة في شهر 9 قبل ضغط الشغل — تكسر "الشِلل" المغلقة وتضمن دخول الجميع في المود</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.4s">
+      <div class="addition-num">05</div>
+      <div class="addition-title"><span class="addition-emoji">📡</span> استمارة نبض اللجنة السري</div>
+      <div class="addition-solve">✓ يرصد الحزازيات مبكراً</div>
+      <p class="addition-desc">فورم سري شهري بدون أسماء يكشف أي خلاف بين الهيد والميمبرز قبل ما يكبر — HR يتدخل بحيادية فوراً</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.5s">
+      <div class="addition-num">06</div>
+      <div class="addition-title"><span class="addition-emoji">⏱️</span> بروتوكول تحدي الـ 48 ساعة</div>
+      <div class="addition-solve">✓ يقضي على الـ Seen الصامت</div>
+      <p class="addition-desc">أي "Seen" بدون رد خلال 48 ساعة يستدعي DM ودي شخصي: "لعلك بخير؟" — يُشعر العضو بالأهمية ويُحفز المسئولية</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- PHASE 3 -->
+<section class="phase-section phase-3">
+  <div class="phase-header reveal">
+    <div class="phase-number-badge">
+      <span class="phase-num">٣</span>
+      <span class="phase-label">PHASE</span>
+    </div>
+    <div class="phase-info">
+      <h2 class="phase-title">المتابعة الاستباقية وإدارة فترة الـ Freeze</h2>
+      <div class="phase-period">📅 شهر ١٢ – فبراير</div>
+      <p class="phase-desc">إدارة فترة الامتحانات بذكاء — الحفاظ على روح التيم دون ضغط على الأعضاء، والتحضير لانطلاقة النصف الثاني</p>
+    </div>
+  </div>
+
+  <div class="problems-title reveal">⚠️ المشاكل المتوقعة في هذه المرحلة</div>
+  <div class="problems-grid reveal">
+    <div class="problem-card">
+      <div class="problem-icon">🤔</div>
+      <p class="problem-text"><strong>أزمة تقييم شهر الـ Freeze:</strong> لا توجد أنشطة — كيف نقيم ونعلن Top Member؟</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">⏰</div>
+      <p class="problem-text"><strong>تأخر الهيدات في التقييمات:</strong> الامتحانات تضغط عليهم فيتأخرون في تسليم الشيتات</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">💀</div>
+      <p class="problem-text"><strong>الموت الإكلينيكي للجروبات:</strong> الجروبات تنام تماماً ويبعد الميمبر نفسياً عن الكيان</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🐌</div>
+      <p class="problem-text"><strong>خمول ما بعد الامتحانات:</strong> صعوبة الـ Restart وإعادة الأعضاء لمود الشغل</p>
+    </div>
+  </div>
+
+  <div class="additions-title reveal">✨ الإضافات والبروتوكولات الجديدة</div>
+  <div class="additions-grid">
+    <div class="addition-card reveal">
+      <div class="addition-num">01</div>
+      <div class="addition-title"><span class="addition-emoji">🏆</span> لوحة شرف الـ Freeze المعنوية</div>
+      <div class="addition-solve">✓ يُبقي التقييم حياً</div>
+      <p class="addition-desc">"Top Member للدعم المعنوي" — تكريم من شجع زملاءه أو ساعد في المذاكرة أو حافظ على روح التيم أونلاين وقت الزنقة</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.1s">
+      <div class="addition-num">02</div>
+      <div class="addition-title"><span class="addition-emoji">⚡</span> فورم التقييم السريع للهيدات</div>
+      <div class="addition-solve">✓ يُنهي تأخر التقييمات</div>
+      <p class="addition-desc">فورم أونلاين بـ Drop-down menu جاهزة — الهيد يُقيّم لجنته كلها في 5 دقائق فعلية بدون جهد إضافي وقت مذاكرته</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.2s">
+      <div class="addition-num">03</div>
+      <div class="addition-title"><span class="addition-emoji">💊</span> رسائل كبسولة التوقعات</div>
+      <div class="addition-solve">✓ يُخفف ضغط الـ Burnout</div>
+      <p class="addition-desc">رسائل شخصية تُذكّر الميمبر بشغفه المكتوب في شهر 8 — تُشعره بالتقدير وتُزيل ضغط التطوع في أصعب اللحظات</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.3s">
+      <div class="addition-num">04</div>
+      <div class="addition-title"><span class="addition-emoji">💬</span> ميتنج الفضفضة (Pulse Check)</div>
+      <div class="addition-solve">✓ يُبقي خيط التواصل</div>
+      <p class="addition-desc">ميتنج أونلاين 15 دقيقة فقط — ممنوع فيه الكلام عن الشغل تماماً، خصصناه للضحك والدعم المعنوي والفضفضة بين الأعضاء</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.4s">
+      <div class="addition-num">05</div>
+      <div class="addition-title"><span class="addition-emoji">🔥</span> خطة الـ Restart والعودة الآمنة</div>
+      <div class="addition-solve">✓ يُسرّع عودة الحماس</div>
+      <p class="addition-desc">أول شهر فبراير: Outing ترفيهي لفك الكسل + إعلان Top Members بقوة لإشعال المنافسة وإرجاع طاقة البداية</p>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- PHASE 4 -->
+<section class="phase-section phase-4">
+  <div class="phase-header reveal">
+    <div class="phase-number-badge">
+      <span class="phase-num">٤</span>
+      <span class="phase-label">PHASE</span>
+    </div>
+    <div class="phase-info">
+      <h2 class="phase-title">التقييم الختامي وتمكين قادة المستقبل</h2>
+      <div class="phase-period">📅 شهر ٣ – ٥</div>
+      <p class="phase-desc">تقفيل السيزون بالتقارير الشاملة، تنظيم رمضان والحفل الختامي، وتصعيد قيادة مؤهلة للسيزون القادم بناءً على الأرقام</p>
+    </div>
+  </div>
+
+  <div class="problems-title reveal">⚠️ المشاكل المتوقعة في هذه المرحلة</div>
+  <div class="problems-grid reveal">
+    <div class="problem-card">
+      <div class="problem-icon">💤</div>
+      <p class="problem-text"><strong>خمول أواخر السيزون:</strong> الشعور بقرب النهاية يُقلل الحماس في أحوج الأوقات</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🎭</div>
+      <p class="problem-text"><strong>اختيار قادة السيزون الجديد:</strong> الكثافة البشرية والمجاملات تعيق الاختيار العادل والموضوعي</p>
+    </div>
+  </div>
+
+  <div class="additions-title reveal">✨ الإضافات والبروتوكولات الجديدة</div>
+  <div class="additions-grid">
+    <div class="addition-card reveal">
+      <div class="addition-num">01</div>
+      <div class="addition-title"><span class="addition-emoji">🎫</span> سيستم نقاط الحسم — The Final Rush</div>
+      <div class="addition-solve">✓ يُشعل الحماس لآخر لحظة</div>
+      <p class="addition-desc">نقاط مضاعفة في الشهر الأخير — Top Members يحصلون على أولوية المشاركة في المؤتمرات الكبرى والماراثونات الرسمية + تكريم مبهر في الحفلة الختامية</p>
+    </div>
+    <div class="addition-card reveal" style="transition-delay:0.1s">
+      <div class="addition-num">02</div>
+      <div class="addition-title"><span class="addition-emoji">🔭</span> شيت رادار قيادة الصف الثاني</div>
+      <div class="addition-solve">✓ يُنهي الاختيار العشوائي</div>
+      <p class="addition-desc">إكسيل يُقيّم كل "Vice دوري" بالأرقام على: الشرح، الالتزام بالـ Deadlines، وحل المشكلات — تقرير رقمي عادل لرئاسة الاتحاد بدون مجاملات</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS MATRIX -->
+<section id="tools">
+  <div class="section-header reveal">
+    <div class="section-tag">HR Tools Matrix</div>
+    <h2 class="section-title">مصفوفة الأدوات <span class="gold">الرقمية</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="tools-table-wrapper reveal">
+    <table class="tools-table">
+      <thead>
+        <tr>
+          <th>الأداة / المخرج</th>
+          <th>التقنية</th>
+          <th>الهدف</th>
+          <th>المرحلة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>كبسولة التوقعات</strong></td>
+          <td><span class="tool-tag tag-word">MS Word + Form</span></td>
+          <td>رصد الدوافع والاحتواء النفسي للأعضاء</td>
+          <td>الأولى والثالثة</td>
+        </tr>
+        <tr>
+          <td><strong>شيت سجل المشاركة العادل</strong></td>
+          <td><span class="tool-tag tag-excel">MS Excel</span></td>
+          <td>توزيع التاسكات بعدالة ومنع احتكار المهام</td>
+          <td>الأولى والثانية</td>
+        </tr>
+        <tr>
+          <td><strong>دليل إدارة الدوافع</strong></td>
+          <td><span class="tool-tag tag-word">MS Word</span></td>
+          <td>تحديد مفاتيح تحفيز الميمبرز وتوجيه شغفهم</td>
+          <td>الثانية</td>
+        </tr>
+        <tr>
+          <td><strong>استمارة نبض اللجنة السري</strong></td>
+          <td><span class="tool-tag tag-google">Google Forms</span></td>
+          <td>لقط الخلافات والحزازيات بين الهيد والميمبر بدري</td>
+          <td>الثانية</td>
+        </tr>
+        <tr>
+          <td><strong>فورم التقييم السريع للهيدات</strong></td>
+          <td><span class="tool-tag tag-google">Google Forms</span></td>
+          <td>تسهيل التقييم الشهري على الهيدات وقت الامتحانات</td>
+          <td>الثالثة</td>
+        </tr>
+        <tr>
+          <td><strong>شيت رادار قيادة الصف الثاني</strong></td>
+          <td><span class="tool-tag tag-excel">MS Excel</span></td>
+          <td>تقييم الـ Vice الدوري لاختيار بورد جديد بشفافية</td>
+          <td>الرابعة</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- KPIs -->
+<section id="kpis">
+  <div class="section-header reveal">
+    <div class="section-tag">KPIs</div>
+    <h2 class="section-title">مؤشرات قياس <span class="gold">النجاح</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="kpis-grid">
+    <div class="kpi-card reveal">
+      <div class="kpi-circle" style="--pct: 306deg">
+        <span class="kpi-pct">85%</span>
+      </div>
+      <div class="kpi-title">معدل الاستبقاء</div>
+      <p class="kpi-desc">الحفاظ على 85%+ من قوام الأعضاء بنهاية السيزون — تصفير الانسحابات</p>
+    </div>
+    <div class="kpi-card reveal" style="transition-delay:0.1s">
+      <div class="kpi-circle" style="--pct: 360deg">
+        <span class="kpi-pct">100%</span>
+      </div>
+      <div class="kpi-title">التزام القيادة</div>
+      <p class="kpi-desc">تسليم الهيدات التقييمات الشهرية في مواعيدها بفضل "فورم الـ 5 دقائق"</p>
+    </div>
+    <div class="kpi-card reveal" style="transition-delay:0.2s">
+      <div class="kpi-circle" style="--pct: 288deg">
+        <span class="kpi-pct">80%</span>
+      </div>
+      <div class="kpi-title">رضا الأعضاء</div>
+      <p class="kpi-desc">تقييم راحة الأعضاء في اللجان لا يقل عن 80% في استمارات نبض اللجنة السري</p>
+    </div>
+    <div class="kpi-card reveal" style="transition-delay:0.3s">
+      <div class="kpi-circle" style="--pct: 360deg">
+        <span class="kpi-pct">100%</span>
+      </div>
+      <div class="kpi-title">جاهزية الصف الثاني</div>
+      <p class="kpi-desc">تصعيد قادة السيزون الجديد بنسبة 100% بناءً على بيانات رادار القيادة — لا اختيار عشوائي</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">YLY</div>
+  <p class="footer-line">اتحاد شباب من أجل مصر · الخطة التشغيلية السنوية للموارد البشرية</p>
+  <p class="footer-line" style="margin-top:0.4rem">محمد جبريل · مسئول HR · تيم 7G · Computer Science</p>
+  <div class="footer-ministry">تابع لوزارة الشباب والرياضة المصرية 🇪🇬</div>
+</footer>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  document.getElementById('progress-bar').style.width = scrollPercent + '%';
+});
+
+// Intersection Observer for reveal animations
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Generate floating particles
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = (8 + Math.random() * 15) + 's';
+  p.style.animationDelay = -(Math.random() * 20) + 's';
+  p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+  p.style.opacity = Math.random() * 0.4;
+  particlesContainer.appendChild(p);
+}
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    nav.style.background = 'rgba(10,35,66,0.95)';
+  } else {
+    nav.style.background = 'rgba(10,35,66,0.85)';
+  }
+});
+
+// Animate KPI circles on scroll
+const kpiCards = document.querySelectorAll('.kpi-card');
+const kpiObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, { threshold: 0.3 });
+kpiCards.forEach(c => kpiObserver.observe(c));
+</script>
+</body>
+</html>
