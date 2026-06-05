@@ -321,7 +321,7 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255
     <div class="hero-stat"><div class="stat-number" data-target="85" data-suffix="%">0</div><div class="stat-label">معدل استبقاء مستهدف</div></div>
     <div class="hero-stat"><div class="stat-number" data-target="6">0</div><div class="stat-label">أدوات رقمية متكاملة</div></div>
   </div>
-  <div class="scroll-hint"><span>اسحب للأسفل</span><div class="scroll-arrow"></div></div>
+  
 </section>
 
 <!-- VISION -->
@@ -610,24 +610,6 @@ for(let i=0;i<25;i++){
   pc.appendChild(p);
 }
 
-/* CURSOR TRAIL */
-const trails=[];
-for(let i=0;i<8;i++){
-  const t=document.createElement('div');t.className='trail';
-  document.body.appendChild(t);trails.push({el:t,x:0,y:0});
-}
-let mx=0,my=0;
-window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-(function at(){
-  requestAnimationFrame(at);let px=mx,py=my;
-  trails.forEach((t,i)=>{
-    t.x+=(px-t.x)*(1-i*.08);t.y+=(py-t.y)*(1-i*.08);
-    t.el.style.left=t.x-3+'px';t.el.style.top=t.y-3+'px';
-    t.el.style.opacity=(1-i/trails.length)*.45;
-    t.el.style.transform=`scale(${1-i*.1})`;
-    px=t.x;py=t.y;
-  });
-})();
 
 /* REVEAL */
 const rvs=document.querySelectorAll('.reveal');
