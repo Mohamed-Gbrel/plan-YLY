@@ -240,7 +240,19 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255
 .particle{position:absolute;width:2px;height:2px;background:var(--accent);border-radius:50%;opacity:0;animation:particle-float linear infinite}
 @keyframes particle-float{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:.6}90%{opacity:.3}100%{opacity:0;transform:translateY(-100vh) scale(1)}}
 
-@media(max-width:768px){.nav-links{display:none}.hero-stats{gap:1rem}.phase-header{flex-direction:column}.phase-number-badge{width:60px;height:60px}}
+/* MOBILE MENU */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--accent);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(6,22,40,.97);backdrop-filter:blur(20px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:rgba(255,255,255,.8);text-decoration:none;font-size:1.4rem;font-weight:700;padding:.6rem 2rem;border-radius:30px;border:1px solid rgba(200,169,81,.2);transition:all .3s;text-align:center;width:220px}
+.mobile-menu a:hover{color:var(--accent);border-color:var(--accent);background:rgba(200,169,81,.08)}
+.mobile-menu-logo{color:var(--accent);font-size:2rem;font-weight:900;margin-bottom:1rem}
+.mobile-menu-close{position:absolute;top:1.2rem;left:1.5rem;background:none;border:none;color:rgba(255,255,255,.6);font-size:1.8rem;cursor:pointer;line-height:1}
+@media(max-width:768px){.hamburger{display:flex}.nav-links{display:none}.hero-stats{gap:1rem}.phase-header{flex-direction:column}.phase-number-badge{width:60px;height:60px}}
 </style>
 </head>
 <body>
@@ -270,7 +282,21 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255
     <li><a href="#tools">الأدوات</a></li>
     <li><a href="#kpis">مؤشرات النجاح</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">✕</button>
+  <div class="mobile-menu-logo">YLY</div>
+  <a href="#vision" class="menu-link">الرؤية</a>
+  <a href="#phases" class="menu-link">المراحل</a>
+  <a href="#swot" class="menu-link">SWOT</a>
+  <a href="#tools" class="menu-link">الأدوات</a>
+  <a href="#kpis" class="menu-link">مؤشرات النجاح</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -400,14 +426,14 @@ footer{padding:3rem 2rem;text-align:center;border-top:1px solid rgba(255,255,255
   <div class="problems-title reveal">⚠️ المشاكل المتوقعة في هذه المرحلة</div>
   <div class="problems-grid reveal">
     <div class="problem-card"><div class="problem-icon">🤔</div><p class="problem-text"><strong>أزمة تقييم شهر الـ Freeze:</strong> لا توجد أنشطة — كيف نقيم ونعلن Top Member؟</p></div>
-    <div class="problem-card"><div class="problem-icon">⏰</div><p class="problem-text"><strong>تأخر الليدرز والميمبرز في التقييمات:</strong> الامتحانات تضغط عليهم فيتأخرون في تسليم الشيتات</p></div>
+    <div class="problem-card"><div class="problem-icon">⏰</div><p class="problem-text"><strong>تأخر الهيدات في التقييمات:</strong> الامتحانات تضغط عليهم فيتأخرون في تسليم الشيتات</p></div>
     <div class="problem-card"><div class="problem-icon">💀</div><p class="problem-text"><strong>الموت الإكلينيكي للجروبات:</strong> الجروبات تنام تماماً ويبعد الميمبر نفسياً عن الكيان</p></div>
     <div class="problem-card"><div class="problem-icon">🐌</div><p class="problem-text"><strong>خمول ما بعد الامتحانات:</strong> صعوبة الـ Restart وإعادة الأعضاء لمود الشغل</p></div>
   </div>
   <div class="additions-title reveal">✨ الإضافات والبروتوكولات الجديدة</div>
   <div class="additions-grid">
     <div class="addition-card reveal"><div class="addition-num">01</div><div class="addition-title"><span class="addition-emoji">🏆</span> لوحة شرف الـ Freeze المعنوية</div><div class="addition-solve">✓ يُبقي التقييم حياً</div><p class="addition-desc">"Top Member للدعم المعنوي" — تكريم من شجع زملاءه أو ساعد في المذاكرة أو حافظ على روح التيم أونلاين وقت الزنقة</p></div>
-    <div class="addition-card reveal" style="transition-delay:.1s"><div class="addition-num">02</div><div class="addition-title"><span class="addition-emoji">⚡</span> فورم التقييم السريع لليدرز والميمبرز</div><div class="addition-solve">✓ يُنهي تأخر التقييمات</div><p class="addition-desc">فورم أونلاين بـ Drop-down menu جاهزة — الهيد يُقيّم لجنته كلها في 5 دقائق فعلية بدون جهد إضافي وقت مذاكرته</p></div>
+    <div class="addition-card reveal" style="transition-delay:.1s"><div class="addition-num">02</div><div class="addition-title"><span class="addition-emoji">⚡</span> فورم التقييم السريع للهيدات</div><div class="addition-solve">✓ يُنهي تأخر التقييمات</div><p class="addition-desc">فورم أونلاين بـ Drop-down menu جاهزة — الهيد يُقيّم لجنته كلها في 5 دقائق فعلية بدون جهد إضافي وقت مذاكرته</p></div>
     <div class="addition-card reveal" style="transition-delay:.2s"><div class="addition-num">03</div><div class="addition-title"><span class="addition-emoji">💊</span> رسائل كبسولة التوقعات</div><div class="addition-solve">✓ يُخفف ضغط الـ Burnout</div><p class="addition-desc">رسائل شخصية تُذكّر الميمبر بشغفه المكتوب في شهر 8 — تُشعره بالتقدير وتُزيل ضغط التطوع في أصعب اللحظات</p></div>
     <div class="addition-card reveal" style="transition-delay:.3s"><div class="addition-num">04</div><div class="addition-title"><span class="addition-emoji">💬</span> ميتنج الفضفضة (Pulse Check)</div><div class="addition-solve">✓ يُبقي خيط التواصل</div><p class="addition-desc">ميتنج أونلاين 15 دقيقة فقط — ممنوع فيه الكلام عن الشغل تماماً، خصصناه للضحك والدعم المعنوي والفضفضة بين الأعضاء</p></div>
     <div class="addition-card reveal" style="transition-delay:.4s"><div class="addition-num">05</div><div class="addition-title"><span class="addition-emoji">🔥</span> خطة الـ Restart والعودة الآمنة</div><div class="addition-solve">✓ يُسرّع عودة الحماس</div><p class="addition-desc">أول شهر فبراير: Outing ترفيهي لفك الكسل + إعلان Top Members بقوة لإشعال المنافسة وإرجاع طاقة البداية</p></div>
@@ -655,6 +681,15 @@ window.addEventListener('scroll',()=>{
   document.querySelector('.orb2').style.transform=`translateY(${-y*.04}px)`;
   document.querySelector('.orb3').style.transform=`translateY(${y*.03}px)`;
 });
+
+/* MOBILE MENU */
+const hb=document.getElementById('hamburger');
+const mm=document.getElementById('mobileMenu');
+const mc=document.getElementById('menuClose');
+function closeMenu(){hb.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+hb.addEventListener('click',()=>{hb.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+mc.addEventListener('click',closeMenu);
+document.querySelectorAll('.menu-link').forEach(a=>a.addEventListener('click',closeMenu));
 </script>
 </body>
 </html>
